@@ -12,7 +12,12 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#
+
+'''
+Socket implementation taken from Dr. Abram Hindle's chat.py
+https://github.com/abramhindle/WebSocketsExamples/blob/master/chat.py accessed on Friday March 22nd
+'''
+
 import flask
 from flask import Flask, request, redirect, jsonify
 from flask_sockets import Sockets
@@ -28,6 +33,8 @@ app.debug = True
 
 
 clients = list()
+
+
 def send_all(msg):
     for client in clients:
         client.put( msg )

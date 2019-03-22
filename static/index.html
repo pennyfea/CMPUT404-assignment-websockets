@@ -44,6 +44,37 @@ debug("Test");
 
 world = {};
 
+
+function sendJSONXMLHTTPRequest(url, objects, callback) {
+        var xhr = new XMLHttpRequest();
+        // console.log("READYSTATE: ", xhr.readyState);
+        // console.log("CALLBACK:", callback);
+        xhr.onreadystatechange = function() {
+          // console.log("READYSTATE: ", xhr.readyState);
+          if (xhr.readyState == 4) {
+            try {
+              if (xhr.status == 200) {
+                //XXX: parse some JSON from the request!
+                var data = JSON.parse(this.responseText);
+                //XXX: Pass the data to the callback!
+                callback(data);
+                // console.log("CALLBACK(DATA)", callback(data));
+              }
+            } catch (e) {
+              alert("Error: " + e.name);
+            }
+          }
+        };
+        //XXX: POST to a URL
+        //XXX: set the mimetype and the accept headers!
+        // Remember to use application/json !
+        // https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/send#Example_POST
+        xhr.open("POST", url, true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.setRequestHeader("Accept", "application/json");
+        xhr.send(JSON.stringify(objects));
+    }
+
 //XXX: TODO Make this prettier!
 function drawCircle(context,entity) {
     with(context) {
@@ -262,6 +293,18 @@ function wsSetup() {
     socket = new WebSocket(url);
     socket.onopen = function() {
         //XXX: TODO What are you going to do here?
+
+        var url = "/world";
+        var object = null;
+        sendJSONXMLHTTPRequest(url, object, function(data) {
+          world = data;
+          drawNextFrame();
+        });
+        drawFrame();
+
+
+
+
     };
     socket.onerror = function(msg) {
         debug("WebSocket Error:" + msg.data);
