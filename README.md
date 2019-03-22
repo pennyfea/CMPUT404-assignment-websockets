@@ -59,3 +59,10 @@ Contributors
 * Mark Galloway
 * Abram Hindle
 * Cole Mackenzie
+* Austin Pennyfeather
+
+Resources
+========================
+This is a [Random-hex-color-code](http://www.paulirish.com/2009/random-hex-color-code-snippets/) generator \
+Understanding [XMLHttpRequest.send()](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/send) \
+Socket implementation [chat.py](https://github.com/abramhindle/WebSocketsExamples/blob/master/chat.py)
